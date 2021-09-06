@@ -5,12 +5,13 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
+using System.IO;
 
 public class GameMaster : MonoBehaviour
 {
     public Text consoleText;
     public Text timeText;
-    public Text historyText;
+    // public Text historyText;
     public UnityEngine.UIElements.ScrollView sv;
     private static GameMaster _instance;
     [HideInInspector]
@@ -20,6 +21,7 @@ public class GameMaster : MonoBehaviour
     public string a_text = "a text";
     public string s_text = "s text";
     public string d_text = "d text";
+    private static string savePath;
 
     [Tooltip("The amount of time after one click after which another input can be added")]
     public float clickTimeThresh = 0.1f;
@@ -44,6 +46,8 @@ public class GameMaster : MonoBehaviour
             _instance = this;
         }
         lastClickedTime = Time.time;
+        savePath = Application.persistentDataPath + System.DateTime.Now.ToString("yyMMdd_hhmmss") + ".txt";
+        Debug.Log("Files will be saved to: " + savePath);
     }
 
     // Update is called once per frame
@@ -60,7 +64,7 @@ public class GameMaster : MonoBehaviour
         List<KeyCode> codes = new List<KeyCode> { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
         string[] strings = new string[] { w_text, a_text, s_text, d_text };
 
-        Debug.Log((Time.time - lastClickedTime));
+        // Debug.Log((Time.time - lastClickedTime));
         if (hoveredButton != null && (Time.time - lastClickedTime) > clickTimeThresh) 
         {
 
@@ -83,8 +87,16 @@ public class GameMaster : MonoBehaviour
     }
 
     public void StampEvent(string eventDescript, string location){
-        string saveStr = System.DateTime.Now.ToString("yy/MM/dd hh:mm:ss.fff") + ", " + location + "," + eventDescript;
+        string saveStr = System.DateTime.Now.ToString("yy/MM/dd hh:mm:ss.fff") + "," + location + "," + eventDescript;
         consoleText.text = saveStr;
-        historyText.text += "\n" + saveStr;
+        WriteString(saveStr);
+    }
+
+    public static void WriteString(string str)
+    {
+        //Write some text to the test.txt file
+        StreamWriter writer = new StreamWriter(savePath, true);
+        writer.WriteLine(str);
+        writer.Close();
     }
 }
