@@ -46,7 +46,7 @@ public class GameMaster : MonoBehaviour
             _instance = this;
         }
         lastClickedTime = Time.time;
-        savePath = Application.persistentDataPath + System.DateTime.Now.ToString("yyMMdd_hhmmss") + ".txt";
+        savePath = Application.persistentDataPath +"/"+ System.DateTime.Now.ToString("yyMMdd_hhmmss") + ".txt";
         Debug.Log("Files will be saved to: " + savePath);
     }
 
