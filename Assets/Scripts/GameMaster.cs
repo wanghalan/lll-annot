@@ -80,7 +80,7 @@ public class GameMaster : MonoBehaviour
                     {
                         hoveredButton.onClick.Invoke();
                         StampEvent(strings[codes.IndexOf(kcode)], hoveredButton.name);
-                        hoveredButton = null;
+                        // hoveredButton = null;
                         break;
                     }
                     else
