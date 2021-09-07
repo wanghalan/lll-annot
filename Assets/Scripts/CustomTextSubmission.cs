@@ -34,6 +34,11 @@ public class CustomTextSubmission : MonoBehaviour
                 gm.CustomStampEvent(inpf.text);
                 Reset();                
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Reset();
+            }
         }
     }
 }
