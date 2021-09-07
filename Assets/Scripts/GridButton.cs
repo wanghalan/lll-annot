@@ -18,17 +18,15 @@ public class GridButton : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (gm != null)
-        {
-            gm.hoveredButton = button;
-            Debug.Log("Entered button " + name);
-        }
-        else
-        {
-            Debug.Log("GM is null");
-        }
+        gm.hoveredButton = button;
+        // Debug.Log("Entered button " + name);        
     }
-    
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        gm.hoveredButton = null;
+    }
+
     public void NormalClick()
     {
         // A normal click symbolizes the moving of the person himself
