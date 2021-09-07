@@ -39,11 +39,11 @@ public class PopulateGrid : MonoBehaviour
 
         float cell_x_size = (Screen.width - 2 * padding - spacing * cell_x_count) / cell_x_count;
         float cell_y_size = (Screen.height - 2 * padding - spacing * cell_y_count) / cell_y_count;
-        Debug.Log("Cell x: " + cell_x_size);
-        Debug.Log("Cell y: " + cell_y_size);
+        //Debug.Log("Cell x: " + cell_x_size);
+        //Debug.Log("Cell y: " + cell_y_size);
         glg.cellSize= new Vector2(cell_x_size, cell_y_size);
         glg.spacing = new Vector2(spacing, spacing);
-        Debug.Log("Cell size: "+ glg.cellSize.x);
+        //Debug.Log("Cell size: "+ glg.cellSize.x);
     }
 
     void Populate()
@@ -52,6 +52,7 @@ public class PopulateGrid : MonoBehaviour
         {
             GameObject newObj = (GameObject)Instantiate(prefab, transform);
             newObj.GetComponentInChildren<Text>().text = i.ToString();
+            newObj.name = "Grid " + i;
         }
     }
 }
