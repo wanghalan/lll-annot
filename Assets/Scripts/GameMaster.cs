@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 
+[Serializable] public class stringMapping : SerializableDictionary<KeyCode, string> { }
 public class GameMaster : MonoBehaviour
 {
     public Text consoleText;
@@ -16,12 +17,8 @@ public class GameMaster : MonoBehaviour
     private static GameMaster _instance;
     [HideInInspector]
     public Button hoveredButton; //The button that is currently being hovered over
-    public GameObject inputPanel; 
 
-    public string w_text = "w text";
-    public string a_text = "a text";
-    public string s_text = "s text";
-    public string d_text = "d text";
+    public stringMapping myMapping;
     private static string savePath;
     private static string tempLocation;
 
@@ -64,36 +61,22 @@ public class GameMaster : MonoBehaviour
             //console.text = mousePos.x + "," + mousePos.y;
         }
 
-        List<KeyCode> codes = new List<KeyCode> { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.C};
-        string[] strings = new string[] { w_text, a_text, s_text, d_text };
+        //List<KeyCode> codes = new List<KeyCode> { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.C};
+        //string[] strings = new string[] { w_text, a_text, s_text, d_text };
 
         // Debug.Log((Time.time - lastClickedTime));
         if (hoveredButton != null && (Time.time - lastClickedTime) > clickTimeThresh) 
         {
 
-            foreach (KeyCode kcode in codes)
+            foreach (KeyCode kcode in myMapping.Keys)
             {
                 if (Input.GetKey(kcode))
                 {
                     lastClickedTime = Time.time;
-                    if (kcode != KeyCode.C)
-                    {
-                        hoveredButton.onClick.Invoke();
-                        StampEvent(strings[codes.IndexOf(kcode)], hoveredButton.name);
-                        // hoveredButton = null;
-                        break;
-                    }
-                    else
-                    {
-                        //If return is pressed
-                        tempLocation = hoveredButton.name;
-                        inputPanel.SetActive(true);
-                        InputField inf = inputPanel.GetComponentInChildren<InputField>();
-                        inf.Select();
-                        inf.ActivateInputField();
-                        hoveredButton = null;
-                        break;
-                    }
+                    hoveredButton.onClick.Invoke();
+                    StampEvent(myMapping[kcode], hoveredButton.name);
+                    // hoveredButton = null;
+                    break;                    
                 }
             }
         }
