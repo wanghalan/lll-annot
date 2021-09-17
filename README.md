@@ -10,9 +10,8 @@ Requirements
 
 To use:
 ---
-  - Update under the Hierarchy/MainCamera's GameMaster component, the corresponding w, a, s, d text
   - Press the Play Button
-  - Hover over a button and press [w,a,s,d] to instantly record that text over that location. The time is automatically stamped
+  - Hover over a button and press any mapped keycode to stamp the event in the time and location
   - The location where the output file will be stored is printed in the console (i.e., User/username/AppData/LocalLow/DefaultCompany/Living Link Lab Annotator/<YYmmdd_HHMMSS>.txt
 
 
