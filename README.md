@@ -2,7 +2,6 @@
 Unity based interface for recording occupant events
 
   - Code for the class at the University of Virginia, Fall 2021, Smart and Healthy Buildings by [Dr. Heydarian](https://engineering.virginia.edu/faculty/arsalan-heydarian) and [Dr. Campbell](https://engineering.virginia.edu/faculty/brad-campbell)
-  - Written by [Alan Wang](https://yaoeh.github.io/alanwang/)
 
 Requirements
 ---
